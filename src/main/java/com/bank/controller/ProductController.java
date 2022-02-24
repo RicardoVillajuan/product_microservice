@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.bank.model.Product;
-import com.bank.repository.ProductRepository;
 import com.bank.service.IProductService;
-
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -43,11 +40,7 @@ public class ProductController {
 	@PutMapping("/{id}")
 	public Mono<Product> saveProduct(@PathVariable String id ,@RequestBody Product product){
 		
-		return productService.findProductById(id).flatMap(e->{
-			e.setName(product.getName());
-			e.setType(product.getType());
-			return productService.save(e);
-		});
+		return productService.update(id, product);
 	}
 	
 	@DeleteMapping("/{id}")

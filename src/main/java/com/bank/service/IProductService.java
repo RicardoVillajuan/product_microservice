@@ -13,7 +13,7 @@ public interface IProductService {
 	
 	Mono<Product> findProductById(String id);
 	
-	Mono<Product> update(Product product);
+	Mono<Product> update(String id, Product product);
 	
 	void deleteById(String id);
 }

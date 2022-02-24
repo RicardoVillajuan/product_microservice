@@ -36,9 +36,12 @@ public class ProductServiceDB implements IProductService{
 	}
 
 	@Override
-	public Mono<Product> update(Product product) {
+	public Mono<Product> update(String id,Product product) {
 		// TODO Auto-generated method stub
-		return repoProduct.save(product);
+		return repoProduct.findById(id).flatMap(e->{
+			product.setId(e.getId());
+			return repoProduct.save(product);
+		});
 	}
 
 	@Override
